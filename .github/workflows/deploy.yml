@@ -44,7 +44,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           conclusion="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow CI --commit "$GITHUB_SHA" \
-            --event push --limit 1 --json conclusion --jq '.[0].conclusion // ""')"
+            --limit 1 --json conclusion --jq '.[0].conclusion // ""')"
           if [ "$conclusion" != "success" ]; then
             echo "::error::CI on $GITHUB_SHA is '${conclusion:-not finished}', not 'success'. Wait for it, or fix main."
             exit 1
